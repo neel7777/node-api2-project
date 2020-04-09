@@ -98,24 +98,24 @@ router.get("/", (req, res) => {
   
   // add an endpoint that returns all the messages for a hub
   // /api/hubs/:id/messages
-  router.get("/:id/messages", (req, res) => {
-    Hubs.findHubMessages(req.params.id)
+  router.get("/:id/comments", (req, res) => {
+    Posts.findCommentById(req.params.id)
       .then((messages) => {
         res.status(200).json(messages);
       })
       .catch((err) => {
-        res.status(500).json({ errorMessage: "error reading messages" });
+        res.status(500).json({ errorMessage: "error reading comments" });
       });
   });
   
   // add an endpoint for adding new message to a hub
-  router.post("/:id/messages", (req, res) => {
-    Hubs.addMessage(req.body)
+  router.post("/:id/comments", (req, res) => {
+    Posts.insertComment(req.body)
       .then((message) => {
         res.status(201).json(message);
       })
       .catch((err) => {
-        res.status(500).json({ errorMessage: "error adding messages" });
+        res.status(500).json({ errorMessage: "error adding comments" });
       });
   });
 
